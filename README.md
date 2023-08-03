@@ -16,13 +16,15 @@ name: Deploy to Surge.sh
 on: [push]
 jobs:
     build-and-deploy:
-        concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+        # Recommended if you intend to make multiple deployments in quick succession.
+        concurrency: ci-${{ github.ref }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
               uses: actions/checkout@v3
 
-            - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+              # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+            - name: Install and Build 🔧
               run: |
                   npm ci
                   npm run build
@@ -30,7 +32,10 @@ jobs:
             - name: Deploy 🚀
               uses: YieldRay/deploy-to-surge-action@v1
               with:
-                  folder: dist # The folder the action should deploy.
-                  domain: mydomain.surge.sh # Your domain or use surge.sh provided.
-                  token: ${{ secrets.SURGE_TOKEN }} # Get token using command: surgecli fetch-token
+                  # The folder the action should deploy.
+                  folder: dist
+                  # Your domain or use surge.sh provided.
+                  domain: mydomain.surge.sh
+                  # Config token via Settings > Actions secrets and variables
+                  token: ${{ secrets.SURGE_TOKEN }}
 ```
