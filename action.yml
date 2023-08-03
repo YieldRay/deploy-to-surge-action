@@ -1,0 +1,24 @@
+# action.yml
+name: "Deploy to surge.sh"
+description: "deploy your static site to surge.sh"
+inputs:
+    folder:
+        description: "the folder the action should deploy"
+        required: true
+        default: "."
+    domain:
+        description: "if you do not have a domain, use xxx.surge.sh"
+        required: true
+    token:
+        description: "get token using command: surgecli fetch-token <username> <password>"
+        required: true
+outputs:
+    message:
+        description: "some command message"
+runs:
+    using: "docker"
+    image: "Dockerfile"
+    args:
+        - ${{ inputs.folder }}
+        - ${{ inputs.domain }}
+        - ${{ inputs.token }}
