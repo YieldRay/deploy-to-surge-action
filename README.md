@@ -7,13 +7,17 @@ You may prefer [this](https://github.com/yavisht/deploy-via-surge.sh-github-acti
 See [this](https://surge.sh/help/adding-a-custom-domain) if you want to setup a custom domain
 
 > If you use official [surge](https://github.com/sintaxi/surge) client, you can fetch your token using command `surge token`  
-> If you use [surgecli](https://github.com/YieldRay/surgecli), you use command `surgecli fetch-token` instead
+> If you use [surgecli](https://github.com/YieldRay/surgecli), then you use command `surgecli token` instead
 
 ## Getting Started
 
 ```yml
 name: Deploy to Surge.sh
-on: [push]
+on:
+    push:
+        branches: ["main"]
+    workflow_dispatch:
+
 jobs:
     build-and-deploy:
         # Recommended if you intend to make multiple deployments in quick succession.
@@ -21,7 +25,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
               # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
             - name: Install and Build 🔧
@@ -30,7 +34,7 @@ jobs:
                   npm run build
 
             - name: Deploy 🚀
-              uses: YieldRay/deploy-to-surge-action@v1
+              uses: YieldRay/deploy-to-surge-action@latest
               with:
                   # The folder the action should deploy.
                   folder: dist
