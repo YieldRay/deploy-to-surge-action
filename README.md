@@ -1,6 +1,6 @@
 # Deploy to Surge.sh
 
-This action use [surgecli](https://github.com/YieldRay/surgecli) to deploy your static site to [surge.sh](https://surge.sh/).
+This action use [`surgecli`](https://github.com/YieldRay/surgecli) to deploy your static site to [surge.sh](https://surge.sh/).
 
 You may prefer [this](https://github.com/yavisht/deploy-via-surge.sh-github-action-template) for your node.js project.
 

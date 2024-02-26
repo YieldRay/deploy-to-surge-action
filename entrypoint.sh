@@ -6,5 +6,11 @@ echo "downloading $bin_url"
 curl -fSskL "$bin_url" -o surgecli
 
 chmod 777 ./surgecli
-SURGE_TOKEN="$3" ./surgecli deploy --silent "$1" "$2"
-exit $?
+
+if ! SURGE_TOKEN="$3" ./surgecli deploy --silent --json "$1" "$2" >info.json; then
+    exit $?
+fi
+
+echo "preview=$(jq -r .metadata.preview <info.json)" >>"$GITHUB_OUTPUT"
+
+cat info.json

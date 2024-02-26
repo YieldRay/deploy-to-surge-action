@@ -12,6 +12,9 @@ inputs:
     token:
         description: The SURGE_TOKEN
         required: true
+outputs:
+    preview:
+        description: Domain for preview
 runs:
     using: docker
     image: Dockerfile
